@@ -8,8 +8,8 @@ For each scene in plan.md:
 CRITICAL: this MUST run before Phase 4 (per-scene HTML). Visual layout sizes
 to the measured audio duration. Estimating duration up front instead → AV drift.
 
-Includes 3/7/15s exponential backoff +
-250 ms throttle between scenes to avoid Microsoft-edge-tts rate limits.
+Includes 3/7/15/30s exponential backoff +
+1000 ms throttle between scenes to avoid Microsoft-edge-tts rate limits.
 """
 from __future__ import annotations
 
@@ -32,8 +32,8 @@ try:
 except (AttributeError, OSError):
     pass
 
-_RETRY_BACKOFF = [3, 7, 15]
-_THROTTLE_MS = 250
+_RETRY_BACKOFF = [3, 7, 15, 30]
+_THROTTLE_MS = 1000
 
 # Per-language default voice. Voice in plan.md > meta.voice wins; this is the fallback.
 # Voice policy: MALE for marketing/tech/AI/code/learning content (default for any2video).
@@ -254,15 +254,14 @@ async def run(plan_path: Path) -> dict:
 
     meta = plan.get("meta", {})
     lang = (meta.get("lang") or "vi").lower()
-    # Default: Google Cloud TTS Chirp 3 HD (preference: more natural VN)
-    # Auto-fallback to edge-tts NamMinhNeural inside synthesize() on any failure.
-    provider = (meta.get("voice_provider") or "google").lower()
+    # Default: edge-tts (preference: vi-VN-NamMinhNeural)
+    provider = (meta.get("voice_provider") or "edge-tts").lower()
     if provider in ("google", "google-tts", "chirp"):
         voice = meta.get("voice") or "vi-VN-Chirp3-HD-Charon"
     else:
         voice = meta.get("voice") or _LANG_DEFAULT_VOICE.get(lang, _FALLBACK_VOICE)
     # Provider-aware default rate (bumped +5 — the old default read a bit slow):
-    # Chirp 3 HD at +5%; edge-tts at +20% or it drags. (DEFAULT provider is google → +5%.)
+    # Chirp 3 HD at +5%; edge-tts at +20% or it drags. (DEFAULT provider is edge-tts → +20%.)
     rate = meta.get("voice_rate")
     if not rate:
         rate = "+5%" if provider in ("google", "google-tts", "chirp") else _DEFAULT_RATE

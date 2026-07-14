@@ -185,7 +185,7 @@ A GitHub tour runs this arc **in this order**. The first seconds decide whether 
 | k+4 | **details** | 7-10 | One differentiator — the thing nobody else does. |
 | k+5 | **review** | 5-8 | Honest caveat-as-feature. "What to know before installing." |
 | k+6 | **author outro** | 6 | Author-profile scroll (`capture_url: https://github.com/<owner>`) — ends with a **star nudge** (§2.2.5.0). |
-| k+7 | **promo** | 4 | `frame-made-with` "made with any2video" bumper — the FINAL scene, default ON (§2.2.7 item 10). |
+| k+7 | **promo** | 4 | `frame-made-with` "made with any2video" bumper — the FINAL scene, default OFF (§2.2.7 item 10). |
 
 Total target: 50-80 sec. `plan_critic` enforces: scene 1 = `frame-pain-hero`; ≥4 pain scenes (all `frame-pain-hero`, so each carries the chip); the reveal card `frame-repo-identity` sits DIRECTLY before the repo-scroll; a repo-scroll scene exists; the closing content scene is author-profile footage with a star line; promo (if present) is last.
 
@@ -519,7 +519,7 @@ misses items 1–4 is **unfinished, not "chưa tới"** — re-open the phase, d
 
 10. **Promo bumper — "made with any2video" (default ON).** Append a FINAL scene
     `templateId: frame-made-with` crediting the tool (+ author). It's controlled by the
-    `--promo` flag (default ON; `--no-promo` to skip). The author name is NEVER hardcoded
+    `--promo` flag (default OFF; pass `--promo` to enable). The author name is NEVER hardcoded
     in the repo — it comes from the operator's config (`ANY2VIDEO_PROMO_AUTHOR`, empty by
     default → tool-credit only). `cli init` resolves the config into `source_pack.json →
     promo_config`; copy those into the scene's `inputs`. `plan_critic` requires the promo,
@@ -544,9 +544,9 @@ meta:
   source_type: github_repo
   lang: vi                          # vi (default) or en — drives narration language
   total_duration_sec: <int>         # 50-80 sec for 9:16 Reels feel
-  voice: vi-VN-Chirp3-HD-Charon     # DEFAULT: MALE, Google TTS. Female ONLY if the user asks.
-  voice_provider: google            # DEFAULT google (Chirp 3 HD); auto-falls back to edge-tts (also MALE) if no key
-  voice_rate: "+5%"                 # default: Chirp 3 HD at +5%, edge-tts fallback at +20% (bumped +5 — old default read a bit slow)
+  voice: vi-VN-NamMinhNeural     # DEFAULT: MALE, edge-tts. Female ONLY if the user asks.
+  voice_provider: edge-tts          # DEFAULT edge-tts
+  voice_rate: "+20%"                # default: edge-tts at +20%
   theme_hint: <free-form mood>
   aspect: "9:16"
   accent: { from: "#ff2d9b", to: "#22d3ee" }   # OPTIONAL video-wide accent colour —
@@ -983,15 +983,13 @@ These rules apply to **every** template HTML in `templates/scenes/` and to any p
 | Aspect | `vi` (default) | `en` |
 |--------|----------------|------|
 | Narration text | drafted in Vietnamese | English |
-| TTS voice (default) | `vi-VN-Chirp3-HD-Charon` (**male**, Google) | `en-US-Chirp3-HD-Charon` (**male**, Google) |
+| TTS voice (default) | `vi-VN-NamMinhNeural` (**male**, edge-tts) | `en-US-GuyNeural` (**male**, edge-tts) |
 | Caption overlay text | Vietnamese, with `<span class="kw">`-wrapped keywords highlighted | English equivalent |
 | Visual labels (numbers, code, badges) | Stay readable across both (no localization needed) | Same |
 
-**TTS defaults (HARD):** **male voice + Google TTS (Chirp 3 HD)** by default. Set
-`meta.voice_provider: google` + a Chirp 3 HD voice; `narrate.py` auto-falls back to
-edge-tts (`vi-VN-NamMinhNeural` / `en-US-GuyNeural`, both **male**) only when Google
-is unavailable (no `GOOGLE_TTS_API_KEY`). Use a **female** voice ONLY when the user
-explicitly asks. Never default to edge-tts when a Google key is present.
+**TTS defaults (HARD):** **male voice + edge-tts** by default. Set
+`meta.voice_provider: edge-tts` + an edge-tts voice.
+Choose a female voice ONLY if the user/source explicitly asks.
 
 Claude in Phase 2 generates `narration` in the chosen language. The planner writes `meta.lang: vi` / `en` in `plan.md`. `narrate.py` selects voice from `meta.voice` if set, else falls back to a language-default.
 

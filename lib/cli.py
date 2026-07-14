@@ -48,7 +48,7 @@ def _promo_config() -> dict:
 
 
 def init(source: str, lang: str = "vi", fast: bool = False,
-         duration: int | None = None, promo: bool = True,
+         duration: int | None = None, promo: bool = False,
          overview: str | None = None) -> dict:
     """Phase 1 — detect type, extract source, write source_pack.json + per-type bundle.
 
@@ -96,7 +96,7 @@ def init(source: str, lang: str = "vi", fast: bool = False,
            "PREFER the overview. Cite it in analysis.md Evidence as `overview.md` and any "
            "scene it drives gets `grounded_in: overview.md`."] if pack.get("has_overview") else []),
         f"Draft analysis.md with the 7 fixed sections (Problem/Solution/Architecture/Flow/How to use/Why/Evidence) → {pack['run_dir']}/analysis.md",
-        f"Draft plan.md per templates/plan-schema.md. Narration MUST be in '{lang}'. Include meta.lang: '{lang}', meta.brand, meta.footer.{_dur_note} EACH non-footage scene MUST have a `templateId` from templates/scenes/CATALOG.md + an `inputs` block matching that template's slots. Default TTS = MALE + Google (voice: vi-VN-Chirp3-HD-Charon, voice_provider: google).",
+        f"Draft plan.md per templates/plan-schema.md. Narration MUST be in '{lang}'. Include meta.lang: '{lang}', meta.brand, meta.footer.{_dur_note} EACH non-footage scene MUST have a `templateId` from templates/scenes/CATALOG.md + an `inputs` block matching that template's slots. Default TTS = MALE + edge-tts (voice: vi-VN-NamMinhNeural, voice_provider: edge-tts).",
         "OPENING ARC (HARD — SKILL §2.2.5): scene 1 = intro identity card (templateId frame-repo-identity, owner+repo shown EXACTLY as the author wrote them — never uppercase/title-case), duration ≤ 2s. THEN 4-6 short pain-point block scenes (highlight-as-spoken). The moment the narration pivots to the repo ('...thì repo này giúp bạn'), cut to a FULL-BLEED repo-scroll scene (capture_url set — full-width, no safezone, caption rides the dark bottom band) describing what the repo solves; its duration = the intro narration so the scroll finishes as the scene ends. THEN the 'problem' beat goes into detail. Author-profile outro scene ends with '...nếu thấy hay thì tặng tác giả một sao làm động lực nhé.'",
         *([f"PROMO BUMPER (flag on): append a FINAL scene templateId frame-made-with, inputs = promo_config from source_pack.json ({json.dumps(promo_cfg, ensure_ascii=False)}). It credits the tool"
            + (" + author" if promo_cfg.get("author") else "") + ". Give it a short narration only if it reads naturally; else leave narration empty (visual-only card)."] if promo_cfg else []),
@@ -146,8 +146,8 @@ def main() -> int:
     s_init.add_argument("--lang", choices=["vi", "en"], default="vi", help="Narration language (default: vi)")
     s_init.add_argument("--fast", action="store_true", help="Use static screenshot render (no motion). Preview only.")
     s_init.add_argument("--duration", type=int, default=None, help="Target length in seconds (HARD ±10s tolerance). Phase 2 budgets narration to it; Phase 3 reconciles.")
-    s_init.add_argument("--no-promo", action="store_true",
-                        help="Skip the closing 'made with any2video' promo bumper (default: ON). "
+    s_init.add_argument("--promo", action="store_true",
+                        help="Add the closing 'made with any2video' promo bumper (default: OFF). "
                              "Author name for the bumper comes from ANY2VIDEO_PROMO_AUTHOR (never hardcoded).")
     s_init.add_argument("--overview", default=None,
                         help="Author-supplied steering text: what the source is really about / its "
@@ -165,7 +165,7 @@ def main() -> int:
         if args.overview_file:
             overview = Path(args.overview_file).read_text(encoding="utf-8")
         result = init(args.source, lang=args.lang, fast=args.fast,
-                      duration=args.duration, promo=not args.no_promo,
+                      duration=args.duration, promo=args.promo,
                       overview=overview)
     else:
         result = status(args.slug)
