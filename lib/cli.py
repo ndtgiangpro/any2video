@@ -48,7 +48,7 @@ def _promo_config() -> dict:
 
 
 def init(source: str, lang: str = "vi", fast: bool = False,
-         duration: int | None = None, promo: bool = True,
+         duration: int | None = None, promo: bool = False,
          overview: str | None = None) -> dict:
     """Phase 1 — detect type, extract source, write source_pack.json + per-type bundle.
 
@@ -146,8 +146,8 @@ def main() -> int:
     s_init.add_argument("--lang", choices=["vi", "en"], default="vi", help="Narration language (default: vi)")
     s_init.add_argument("--fast", action="store_true", help="Use static screenshot render (no motion). Preview only.")
     s_init.add_argument("--duration", type=int, default=None, help="Target length in seconds (HARD ±10s tolerance). Phase 2 budgets narration to it; Phase 3 reconciles.")
-    s_init.add_argument("--no-promo", action="store_true",
-                        help="Skip the closing 'made with any2video' promo bumper (default: ON). "
+    s_init.add_argument("--promo", action="store_true",
+                        help="Include the closing 'made with any2video' promo bumper (default: OFF). "
                              "Author name for the bumper comes from ANY2VIDEO_PROMO_AUTHOR (never hardcoded).")
     s_init.add_argument("--overview", default=None,
                         help="Author-supplied steering text: what the source is really about / its "
@@ -165,7 +165,7 @@ def main() -> int:
         if args.overview_file:
             overview = Path(args.overview_file).read_text(encoding="utf-8")
         result = init(args.source, lang=args.lang, fast=args.fast,
-                      duration=args.duration, promo=not args.no_promo,
+                      duration=args.duration, promo=args.promo,
                       overview=overview)
     else:
         result = status(args.slug)

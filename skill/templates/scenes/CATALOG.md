@@ -14,7 +14,7 @@ The first seconds decide retention, so the opening is fixed (PA1): **open on the
 4. **repo-scroll pivot** — cut to a **full-bleed** repo-scroll scene: `capture_url: https://github.com/<owner>/<repo>`. Full-width, no safe-zone (real footage); the caption rides the dark bottom band automatically. Its `duration_sec` = the narration length so the scroll finishes as the scene ends.
 5. **problem → …** — now go into detail with the card templates below.
 6. **author outro** — author-profile scroll (see outro row).
-7. **promo** — `frame-made-with` (default ON, always the FINAL scene).
+7. **promo** — `frame-made-with` (default OFF, always the FINAL scene).
 
 ## Pick by beat (Phase 2 plan.md)
 
@@ -28,7 +28,7 @@ The first seconds decide retention, so the opening is fixed (PA1): **open on the
 | **details** | `frame-aicoding-comparison` | Head-to-head 2-card layout — before/after, vs alternative |
 | **review** | `frame-pentagram-stat` OR `frame-build-minimal` | One hero stat with glow, OR one-word bold statement |
 | **outro** | *author-profile footage — NO template* | Close on a real scroll of `https://github.com/<owner>` (author profile, bio, other repos) via `capture_url`. Narration ends with a star nudge (see below). The old `frame-statement-outro` white-card / red-text closing is **BANNED** (SKILL §2.2.7). |
-| **promo** | `frame-made-with` | "Made with any2video" bumper — FINAL scene, default ON |
+| **promo** | `frame-made-with` | "Made with any2video" bumper — FINAL scene, default OFF |
 
 > `frame-liquid-bg-hero` (headline-first hero) still ships for non-repo intros / raw-text videos, but a GitHub tour opens on `frame-pain-hero`.
 
@@ -104,7 +104,7 @@ Circular owner avatar (spinning gradient ring) + GitHub mark + `owner/repo` hand
   - `stars` / `forks` / `language` — social-proof pills (any subset; e.g. `stars: "9.2k"`, `forks: "640"`, `language: "TypeScript"`)
   - `new_tag` — a quiet "mới ra mắt" pill for a new/low-star repo (shown only when no stars/forks/language passed)
 
-### frame-made-with (promo bumper — FINAL scene, default ON) — VERIFIED ✓
+### frame-made-with (promo bumper — FINAL scene, default OFF) — VERIFIED ✓
 "Video này được tạo bởi **any2video**" — credits the tool, optionally the author. Author name is NEVER hardcoded: it comes from the operator's config (`ANY2VIDEO_PROMO_AUTHOR`) and is empty by default → the author pill hides and only the tool credit shows. cli surfaces the resolved values in `source_pack.json` → `promo_config`.
 - `tool` — tool wordmark, casing preserved (default "any2video")
 - `tagline` — one-line tool description
