@@ -12,7 +12,7 @@ import { Audio } from "@remotion/media";
 import { loadFont as loadBVP } from "@remotion/google-fonts/BeVietnamPro";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
 import { loadFont as loadSG } from "@remotion/google-fonts/SpaceGrotesk";
-import { Rise, progressAt } from "../lib/core";
+import { Watermark, Rise, progressAt } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { SCENES } from "./fb-ads-2026-data";
 
@@ -682,6 +682,7 @@ export const FbAds2026: React.FC = () => {
   let cursor = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const from = cursor;
         cursor += scene.durationInFrames;

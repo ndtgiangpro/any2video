@@ -8,7 +8,7 @@ import {
 import { Audio } from "@remotion/media";
 import { loadFont as loadBVP } from "@remotion/google-fonts/BeVietnamPro";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, countAt, progressAt } from "../lib/core";
+import { Rise, countAt, progressAt, Watermark } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { SCENES } from "./shopify-schema-2shop-data";
 
@@ -1008,6 +1008,7 @@ export const ShopifySchema2Shop: React.FC = () => {
   let from = 0;
   return (
     <AbsoluteFill style={{ background: C.bg }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const el = (
           <Sequence

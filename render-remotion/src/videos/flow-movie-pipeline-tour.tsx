@@ -14,7 +14,7 @@ import { Audio } from "@remotion/media";
 import { loadFont as loadFraunces } from "@remotion/google-fonts/Fraunces";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, progressAt } from "../lib/core";
+import { Watermark, Rise, progressAt } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { FootageScene } from "../lib/footage";
 import { SCENES } from "./flow-movie-pipeline-tour-data";
@@ -904,6 +904,7 @@ export const FlowMoviePipelineTour: React.FC = () => {
   let cursor = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bgA }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const from = cursor;
         cursor += scene.durationInFrames;

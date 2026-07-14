@@ -13,7 +13,7 @@ import {
 import { Audio } from "@remotion/media";
 import { loadFont as loadBVP } from "@remotion/google-fonts/BeVietnamPro";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, progressAt } from "../lib/core";
+import { Watermark, Rise, progressAt } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { FootageScene } from "../lib/footage";
 import { SCENES } from "./flow-movie-pipeline-tour-data";
@@ -1000,6 +1000,7 @@ export const FlowMoviePipelineRepoDark: React.FC = () => {
   let cursor = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const from = cursor;
         cursor += scene.durationInFrames;

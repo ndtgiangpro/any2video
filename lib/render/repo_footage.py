@@ -197,7 +197,8 @@ def build_scroll_clip(png: Path, png_w: int, png_h: int,
         f"color=c={BG}:s={CANVAS_W}x{CANVAS_H}:d={duration_sec:.3f}:r=30[bg];"
         f"[0:v]scale={CARD_W}:-1[img];"
         f"[bg][img]overlay=x=(W-w)/2:y='{y_expr}':shortest=0[ov];"
-        f"[ov][1:v]overlay=x=0:y=0[out]"
+        f"[ov][1:v]overlay=x=0:y=0[out_no_wm];"
+        f"[out_no_wm]drawtext=text='@ndtgiangai':x=(w-text_w)/2:y=h-h*0.1-text_h:fontsize=36:fontcolor=white@0.5:font='sans-serif'[out]"
     )
 
     cp = subprocess.run(

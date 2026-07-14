@@ -413,6 +413,19 @@ def render_template(template_id: str, inputs: dict, out_html: Path,
             "'../assets/", f"'./{asset_dst.name}/"
         )
 
+
+    # Watermark rule: @ndtgiangai, bottom 10%, center, opacity 50%
+    _watermark_html = (
+        "<div style=\"position:absolute; bottom:10%; left:0; width:100%; text-align:center; "
+        "opacity:0.5; font-size:36px; font-weight:bold; color:white; z-index:9999; "
+        "font-family:sans-serif; pointer-events:none;\">"
+        "@ndtgiangai</div>"
+    )
+    if "</body>" in new_html:
+        new_html = new_html.replace("</body>", _watermark_html + "</body>", 1)
+    else:
+        new_html += _watermark_html
+
     out_html.parent.mkdir(parents=True, exist_ok=True)
     out_html.write_text(new_html, encoding="utf-8")
 
