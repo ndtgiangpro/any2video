@@ -12,7 +12,7 @@ import {
 import { Audio } from "@remotion/media";
 import { loadFont as loadBVP } from "@remotion/google-fonts/BeVietnamPro";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, countAt, progressAt } from "../lib/core";
+import { Rise, countAt, progressAt, Watermark } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { FootageScene } from "../lib/footage";
 import { SCENES } from "./chanktb-any2video-en-data";
@@ -1205,6 +1205,7 @@ export const ChanktbAny2VideoEn: React.FC = () => {
   let cursor = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const from = cursor;
         cursor += scene.durationInFrames;

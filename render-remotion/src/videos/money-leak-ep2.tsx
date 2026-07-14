@@ -11,7 +11,7 @@ import {
 import { Audio } from "@remotion/media";
 import { loadFont as loadHand } from "@remotion/google-fonts/PatrickHand";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, countAt, progressAt } from "../lib/core";
+import { Rise, countAt, progressAt, Watermark } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { FootageScene } from "../lib/footage";
 import { SCENES } from "./money-leak-ep2-data";
@@ -895,6 +895,7 @@ export const MoneyLeakEp2: React.FC = () => {
   let cursor = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const from = cursor;
         cursor += scene.durationInFrames;

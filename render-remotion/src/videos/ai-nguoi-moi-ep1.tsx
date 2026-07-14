@@ -10,7 +10,7 @@ import {
 import { Audio } from "@remotion/media";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, countAt, progressAt } from "../lib/core";
+import { Rise, countAt, progressAt, Watermark } from "../lib/core";
 import { KaraokeMarker } from "../lib/karaoke";
 import { SCENES, TOTAL_FRAMES } from "./ai-nguoi-moi-ep1-data";
 
@@ -814,6 +814,7 @@ export const AiNguoiMoiEp1: React.FC = () => {
   let cursor = HOOK_FRAMES;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <Watermark />
       <Sequence from={0} durationInFrames={HOOK_FRAMES} premountFor={20}>
         <S00 />
       </Sequence>

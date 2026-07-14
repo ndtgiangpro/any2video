@@ -12,7 +12,7 @@ import {
 import { Audio } from "@remotion/media";
 import { loadFont as loadBVP } from "@remotion/google-fonts/BeVietnamPro";
 import { loadFont as loadJBM } from "@remotion/google-fonts/JetBrainsMono";
-import { Rise, countAt, progressAt } from "../lib/core";
+import { Rise, countAt, progressAt, Watermark } from "../lib/core";
 import { KaraokeNeon } from "../lib/karaoke";
 import { SCENES } from "./caveman-ponytail-data";
 
@@ -789,6 +789,7 @@ export const CavemanPonytail: React.FC = () => {
   let cursor = 0;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
+      <Watermark />
       {SCENES.map((scene) => {
         const from = cursor;
         cursor += scene.durationInFrames;

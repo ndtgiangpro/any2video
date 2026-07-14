@@ -1,5 +1,7 @@
 import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import {
+ AbsoluteFill, Sequence } from "remotion";
+import { Watermark } from "../lib/core";
 import { FootageScene } from "../lib/footage";
 import { KaraokeNeon } from "../lib/karaoke";
 import { loadFont } from "@remotion/google-fonts/BeVietnamPro";
@@ -31,6 +33,7 @@ export const FOOTAGE_DEMO_FRAMES = 240; // 8s
 
 export const FootageDemo: React.FC = () => (
   <AbsoluteFill>
+    <Watermark />
     <Sequence durationInFrames={FOOTAGE_DEMO_FRAMES}>
       <FootageScene src="footage/demo_scroll.mp4" />
       <KaraokeNeon words={DEMO_WORDS} fontFamily={fontFamily} />

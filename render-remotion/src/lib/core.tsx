@@ -144,3 +144,27 @@ export const clipLineToRect = (
   const t = Math.max(0, Math.min(1, Math.max(txmin, tymin))) - gap / full;
   return { x: x0 + dx * t, y: y0 + dy * t };
 };
+
+
+// Watermark element injected as a global overlay per rule: @ndtgiangai, bottom 10%, center, opacity 50%
+export const Watermark: React.FC = () => {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: "10%",
+        width: "100%",
+        textAlign: "center",
+        opacity: 0.5,
+        fontSize: 36,
+        fontWeight: "bold",
+        color: "white",
+        zIndex: 9999,
+        fontFamily: "sans-serif",
+        pointerEvents: "none",
+      }}
+    >
+      @ndtgiangai
+    </div>
+  );
+};
