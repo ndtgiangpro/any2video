@@ -12,8 +12,8 @@ meta:
   target_duration_sec: 60        # OPTIONAL — set only when the user requested a length
                                  # (or via `init --duration`). HARD: measured total must
                                  # land within ±10s of this. See SKILL §2.2.6 b.2.
-  voice: vi-VN-Chirp3-HD-Charon  # DEFAULT: MALE + Google TTS. Female only if the user asks.
-  voice_provider: google         # DEFAULT google (Chirp 3 HD); auto-falls back to edge-tts MALE (NamMinh/Guy)
+  voice: vi-VN-NamMinhNeural  # DEFAULT: MALE + edge-tts. Female only if the user asks.
+  voice_provider: edge-tts    # DEFAULT edge-tts
   theme_hint: "dark, technical, monospace accents"
   aspect: "9:16"                 # quote ALWAYS — PyYAML reads 9:16 as sexagesimal int 556 if unquoted
 

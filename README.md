@@ -131,9 +131,8 @@ set the same names as environment variables.
 | **edge-tts** (default fallback) | Good, free | none |
 | **Google Cloud TTS** (Chirp 3 HD) | Best, natural | `GOOGLE_TTS_API_KEY` |
 
-Default is a **male voice** via **Google Cloud TTS (Chirp 3 HD)** when `GOOGLE_TTS_API_KEY`
-is set; otherwise it falls back automatically to a male edge-tts voice — so it works with
-**no key at all**. (Pick a female or different voice per plan via `meta.voice`.)
+Default is a **male voice** via **edge-tts** — so it works with **no key at all**.
+(Pick a female or different voice per plan via `meta.voice`. You can also configure it to use Google Cloud TTS via `meta.voice_provider: google`.)
 
 **Optional — Telegram delivery** (send the transcript / final video to a chat):
 
